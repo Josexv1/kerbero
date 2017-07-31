@@ -1,0 +1,27 @@
+{
+  "name": "kerbero",
+  "productName": "Kerbero",
+  "version": "0.0.1a",
+  "description": "Download manga for free",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Jose Suarez",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "1.6.11"
+  },
+  "dependencies": {
+    "async": "^2.1.4",
+    "cheerio": "^1.0.0-rc.2",
+    "cloudkicker": "^1.0.12",
+    "cloudscraper": "^1.4.1",
+    "electron-context-menu": "^0.8.0",
+    "electron-window-state-manager": "^0.3.0",
+    "fs-extra": "^2.0.0",
+    "request": "^2.79.0",
+    "request-progress": "^3.0.0",
+    "winston": "^2.3.0"
+  }
+}

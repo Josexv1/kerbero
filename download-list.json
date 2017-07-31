@@ -1,0 +1,82 @@
+{
+  "downloading": {
+    "manga name": {
+      "chapter 1": {
+        "link": "url",
+        "imgs": {
+          "1": "url",
+          "1": "url",
+          "1": "url",
+          "1": "url",
+          "1": "url",
+          "1": "url"
+        }
+      },
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      }
+    }
+  },
+  "waiting":{
+    "manga name": {
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      }
+    },
+    "manga name": {
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      }
+    },
+    "manga name": {
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      },
+      "chapter 1": {
+        "link": "url"
+      }
+    }
+  }
+}

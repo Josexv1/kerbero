@@ -1,0 +1,43 @@
+/*Overwrite material styles here*/
+body{
+  background-color: white;
+}
+table.responsive-table td:empty:before {
+    display: block;
+    min-height: 56px;
+}
+
+.valignicon {
+    position: relative;
+    transform: translateY(+8%);
+}
+
+td > img {
+    display: flex;
+}
+.tabs.tabs-fixed-width {
+  background-blend-mode: lighten;
+}
+
+.progress{
+  z-index;1;
+  width:10%;
+  height:100%;
+  position:absolute;
+  background:blue;
+  left:0px;
+  top:0px;
+  bottom: 0px;
+  margin: 0px;
+}
+.status-bar{
+  z-index:9;
+  position:relative;
+}
+#status{
+background: #3A3A3A;
+ color:white;
+  padding:7px;
+   overflow:hidden;
+    position:relative;
+  }

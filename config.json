@@ -1,0 +1,22 @@
+{
+  "app": {
+    "option": "",
+    "showHelp": true
+  },
+  "userDefined": {
+    "downloadFolder": "",
+    "downloadThreads": "1",
+    "language": "Spanish",
+    "checkNewChapterFreq": "1",
+    "checkAppUpdateFreq": "1",
+    "downloadExt": null,
+    "mangaFavs": {
+    },
+    "myAnimeList": {
+      "updateMangaFreq": "1",
+      "api": "",
+      "data": "data",
+      "data2": "data"
+    }
+  }
+}
