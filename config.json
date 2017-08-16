@@ -4,13 +4,14 @@
     "showHelp": true
   },
   "userDefined": {
-    "downloadFolder": "",
-    "downloadThreads": "1",
-    "language": "Spanish",
+    "downloadFolder": "C:\\Users\\Sexy\\Documents\\test",
+    "downloadThreads": "3",
+    "language": "English",
     "checkNewChapterFreq": "1",
     "checkAppUpdateFreq": "1",
     "downloadExt": null,
     "mangaFavs": {
+      "Hana Haru": "C:\\Users\\Sexy\\Documents\\test\\Hana Haru"
     },
     "myAnimeList": {
       "updateMangaFreq": "1",

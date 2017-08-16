@@ -11,7 +11,7 @@ const defaultConfig =
   {
     "app": {
       "option": "",
-      "showHelp": true
+      "showHelp": false
     },
     "userDefined": {
       "downloadFolder": "",

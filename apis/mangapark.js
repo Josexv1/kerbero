@@ -3,9 +3,9 @@ const cheerio = require('cheerio');
 // we export the var URL from the func.js so we can work with it.
 module.exports = (url) => {
   // we need to work here, because we need the url variable.
-var manga = defaultMangaConf;
+let manga = defaultMangaConf;
 // Set the headers
-var headers = {
+let headers = {
     'User-Agent':       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
     'Content-Type':     'application/x-www-form-urlencoded; charset=UTF-8',
     'Accept-Charset': 'utf-8',
@@ -15,7 +15,7 @@ var headers = {
 }
 
 // Configure the request
-var options = {
+let options = {
     url: url,
     method: 'GET',
     headers: headers
@@ -37,7 +37,7 @@ try {
     manga.author = $d('.attr > tbody:nth-child(2) > tr:nth-child(5) > td:nth-child(2) > a:nth-child(1)').text().replace(/[\n\t\r]/g,"");
     manga.artist = $d('.attr > tbody:nth-child(2) > tr:nth-child(6) > td:nth-child(2) > a:nth-child(1)').text().replace(/[\n\t\r]/g,"");
     // TODO: Rewrite this with an array then join(', ')
-    var genres = ''; //start empty ;)
+    let genres = ''; //start empty ;)
     $d('.attr > tbody:nth-child(2) > tr:nth-child(7) > td:nth-child(2) a').each(function() {
     if (genres == '') {
       genres = this.attribs.title;
@@ -63,6 +63,7 @@ try {
           mn = manga.name;
             // we need to do this to get it working inside the favs
     // if the user press fav button then
+    console.log('out fav coverLocalPath' ,saveTo);
     console.log('out favs coverLocation',manga.coverLocation);
     $('#add_to_fav > i').on('click', function () {
       console.log('saveTo', saveTo);
@@ -71,8 +72,13 @@ try {
     $('#remove_from_fav > i').on('click', function () {
       faves(false, saveTo, coverUrl, pathCover, mn, manga);
     });
-    var chapters = getMangaParkChapters();
+    let chapters = getMangaParkChapters();
     updateChTable(chapters);
+
+    $('#downlaod_start').submit(function(event) {
+      event.preventDefault();
+      addToQueue(json); // Will just add to the queue list in the downlaod tab
+    });
 console.log('Manga is empty check: ',manga);
 }//end if
 } catch (e) {

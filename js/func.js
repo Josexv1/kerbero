@@ -1,6 +1,23 @@
 const request = require('request');
 const fs = require('fs-extra');
 const progress = require('request-progress');
+const cheerio = require('cheerio');
+
+// Steps
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //##############################    UTILS      ###############################\\
@@ -81,19 +98,82 @@ function saveSettings() {
     $('#modal_msg').modal('open');
   };
   // select checkboxes helper
-  $('#select_all_ch').click(function(event) {
+  $('#select_all_ch').click(function() {
     $("input:checkbox").attr('checked', true);
   });
+
   $('#uncheck_all_ch').click(function(){
   $("input:checkbox").attr('checked', false);
-});
+  });
 
 //downlaod button test
 $('#download_ch').submit(function(event) {
   event.preventDefault();
   // We get the Obj with the name and link and give it to the queue algo
-  queue(getDownloadList());
+  console.log(getDownloadList());
+  addToQueue(getDownloadList());
 });
+
+function addToQueue(links) {
+  var piclist = {};
+  console.log('Link list: ',links);
+  var keys=Object.keys(links);
+  for (i = 0; i < keys.length; i++) {
+    piclist = getMangaParkPics(links[keys[i]]);
+    console.log('Piclist: ',piclist);
+  }
+}
+
+function getMangaParkChapters() {
+  var map = {};
+  $d(".ch.sts").each(function() {
+    //FIXME: toogle offline/online settings.
+    //link = this.attribs.href; //offline -> localhost
+    link = 'http://mangapark.me'+this.attribs.href; //online
+    link = link.slice(0, -2);
+    map[$(this).text()] = link;
+  });
+  return map;
+};
+function getMangaParkPics(mangaLink) {
+  /*
+  @mangaLink: String
+  */
+  var headers = {
+      'User-Agent':       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+      'Content-Type':     'application/x-www-form-urlencoded; charset=UTF-8',
+      'Accept-Charset': 'utf-8',
+      'Accept-Language': 'es,en-US;q=0.7,en;q=0.3',
+      'Connection': 'keep-alive',
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  }
+
+  // Configure the request
+  var options = {
+      url: mangaLink,
+      method: 'GET',
+      headers: headers
+  }
+  var chpImgList = [];
+      // load url one by one.
+      console.log('Manga link: ',mangaLink);
+      request(options, function (error, response, body) {
+        try {
+          if (response.statusCode == 200) {
+            console.log('Respuesta 200, pasamos al body!');
+            $x = cheerio.load(body);
+            console.log('Body: ',$x);
+            $x('.img.arrow-down').each(function() {
+            chpImgList.push(this.attrib.href);
+            console.log('Lista de img: ',chpImgList);
+          })
+        }
+        } catch(e){
+          console.log('Error: ',e);
+          }
+      });
+      return chpImgList;
+  };
 
 // get the val from all Checkboxes
 function getDownloadList() {
@@ -107,6 +187,7 @@ function getDownloadList() {
 }
   function faves(add, dir, coverUrl, coverLocalPath, mangaName, mangaJson) {
     if (add) {
+      console.log(' So this is: ',add + ' ' + dir + ' ' + coverUrl + ' ' + coverLocalPath + ' ' + mangaName + ' ' + mangaJson);
         $('#add_to_fav').addClass('hide');
         $('#remove_from_fav').removeClass('hide');
         /*
@@ -218,44 +299,25 @@ function getDownloadList() {
 
   function updateChTable(data) {
       $('#chap_list_wrap').removeClass('hide');
-    //if updating we empty the chap list, then add the header, then add the chaps
-$('#chap_list').empty();
-$('#chap_list').append('<li class="collection-header">Chapter name<div class="secondary-content">Download</div></li>');
-    for (x in data) {
+    //we empty the chap list, then add the header, then add the chaps
+    $('#chap_list').empty();
+    $('#chap_list').append('<li class="collection-header">Chapter name<div class="secondary-content">Download</div></li>');
+      for (x in data) {
       // X = chap name
       // data[x] = chap url
-$("#chap_list").append(
-  '<li class="collection-item">'+
-  '<div>'+ x +
-  '<div class="secondary-content">'+
-  '<p>'+
-  '<input type="checkbox" id="' + x + '" data-url='+data[x]+'/>'+
-  '<label for="' + x + '"></label>' +
-  '</p>'+
-  '</div>'+
-  '</div>'+
-  '</li>');
-  };
-};
-
-  function getMangaParkChapters() {
-    var map = {};
-    $d(".ch.sts").each(function() {
-      //FIXME: toogle offline/online settings.
-      //link = this.attribs.href; //offline -> localhost
-      link = 'http://mangapark.me'+this.attribs.href; //online
-      link = link.slice(0, -2);
-      map[$(this).text()] = link;
-    });
-    return map;
-  };
-  function getMangaParkPics() {
-    var chpImgList = [];
-    $d('.img.arrow-down').each(function() {
-      chpImgList.push(this.attrib.href);
-    });
-    return chpImgList;
-  };
+      $("#chap_list").append(
+        '<li class="collection-item">'+
+        '<div>'+ x +
+        '<div class="secondary-content">'+
+        '<p>'+
+        '<input type="checkbox" id="' + x + '" data-url='+data[x]+'/>'+
+        '<label for="' + x + '"></label>' +
+        '</p>'+
+        '</div>'+
+        '</div>'+
+        '</li>');
+      };
+    };
 
   // submit from tab manga from url
 $('#tab_manga_form_url').submit(function (ev) {
@@ -266,41 +328,131 @@ $('#tab_manga_form_url').submit(function (ev) {
   $('#loading').removeClass('hide');
   console.log('we\'ve hidden everything and shows our loading');
   var url = $("#manga_url").val();
-// debug!
+  // debug!
   //console.log(url);
   // Validate URL somehow
   urlRouter(url);
-
-// function to simpleSave(url)
-function simpleSave(url) {
-
-};
 });//end tab_manga_from_url
+
 function urlRouter(url) {
   if (url.indexOf('mangapark')) {
     //load mangapark
     require('./apis/mangapark')(url);
   }
 
-}
+}//end router
 
-function queue(list, name) {
-/*
-Algo: recive the obj with name and url
-parse one by one to the download function and print everything
-TODO: needs to be smart enough for removing or arrange the downloads in manga
-This will download the list in the order given, wont sort the items inside a manga
-Example manga_a = 3 ch
-first: ch 1, next ch 2, next ch 3. or in the order given: ch 1, ch 4, ch 6.
-In mangas, will download in the order given in the data from the app. Downlad list.
-If a manga is clicked to cancel, destroy the request, and remove all the queue.
-If a manga is paused, pause everything.
-If a manga is moved to the first position, destroy the current task, and start the new manga
-The position is saved as in the APP list.
-The chap downloading needs to be saved, example:
-            manga_a: ch 1, 26 pages, downloading number 15. Moved in queue list.
-            destroy, don't count the page, so it will say last download is 14.
-            start the next manga, when it's turn comes, start from the page 15.
-*/
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function addToQueue(downloadJSON, list, name) {
+//   /*
+// Algo: recive the obj with name and url
+// parse one by one to the download function and print everything
+// TODO: needs to be smart enough for removing or arrange the downloads in manga
+// This will download the list in the order given, wont sort the items inside a manga
+// Example manga_a = 3 ch
+// first: ch 1, next ch 2, next ch 3. or in the order given: ch 1, ch 4, ch 6.
+// In mangas, will download in the order given in the data from the app. Downlad list.
+// If a manga is clicked to cancel, destroy the request, and remove all the queue.
+// If a manga is paused, pause everything.
+// If a manga is moved to the first position, destroy the current task, and start the new manga
+// The position is saved as in the APP list.
+// The chap downloading needs to be saved, example:
+//             manga_a: ch 1, 26 pages, downloading number 15. Moved in queue list.
+//             destroy, don't count the page, so it will say last download is 14.
+//             start the next manga, when it's turn comes, start from the page 15.
+// the obj list and name will be used as follow
+// obj ={ch,link}, name
+// We will:
+//   * Check all links.
+//   * Check if the queue is up, or empty.
+//   * If empty, add to downloading and startQueue()
+//   * If full, add to waiting.
+//   * get number of pics from every link
+//   * Write the download-list.json with the values.
+//   * Process ASYNC the links with the throtle and threads.
+//   "downloading": {
+//     "manga name": {
+//       "chapter 1": {
+//         "link": "url",
+//         "imgs": {
+//           "1": "url"
+//         }
+//     our list is:
+//     "ch1" : "http://ssss.co/odkd.html"
+// */
+//   if (downladJSON.downloading === undefined) {
+//     // add to waiting
+//     //check if it's already in queue
+//     if (alreadyInQueue() === true) {
+//       message('Chapter already in queue', 'Sorry m8, but this chapter is already waiting to be downloading.');
+//     }else {
+//       //adding to waiting
+//       downloadJSON[name][list.ch] =
+//     };
+//   }else{
+//     // add to downliading right away!
+//   };
+// } // end addToQueue
+//
+// queueStart(downladJSON){
+//   if (downloadJSON.downloading === undefined && downloadJSON.waiting === undefined) {
+//     if (downloadJSON.waiting === undefined) {
+//         message('What?', 'Huh? you don\'t have anything to download dumbass.');
+//     }else{
+//       getNextItem();
+//     }
+//   }else{
+//     message('We\'re doing what we can!', 'We\'re downloading as fast as we can!')
+//   }
+// }//end queueStart
+//
+// /* read the actual JSON, and check what sould we do first.*/
+// queuePause();
+// currentItem();
+// getNextItem();
+// cancelDownload();
+// moveQueue();
+// alreadyInQueue();
+// updateDownloadTable();
+// };
+//
+// function compress(data, data, data) {
+//
+// };

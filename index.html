@@ -1,496 +1,489 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title> > Kerbero</title>
-  <meta name="charset" content="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="css/materialize.min.css"/>
-  <link rel="stylesheet" type="text/css" href="css/animate.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
-<body>
-  <!--****************Tittle-bar buttons and app name + version***************************-->
-<div id="title-bar">
-  <div id="title"><span id="application_name"></span> ver. <span id="application_version"></span></div>
-
-  <div id="title-bar-btns">
-    <button id="min-btn"><i class="material-icons">expand_more</i></button>
-    <button id="max-btn"><i class="material-icons">aspect_ratio</i></button>
-    <button id="close-btn"><i class="material-icons">settings_power</i></button>
-  </div>
-</div>
-
-<!--***********************************************MODALS***********************************************-->
-
-<!--###########################################MODAL_SETTINGS###########################################-->
-<div id="modal_settings" class="modal modal-fixed-footer">
-  <div class="modal-content">
-    <div class="row">
-      <h4 class="col s12">Settings</h4>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <i class="material-icons prefix">folder</i>
-        <input type="text" id="settings_download_folder"/>
-        <label for="settings_download_folder">Folder to download <i class="material-icons valignicon tiny tooltipped" data-position="right" data-delay="50" data-tooltip="Select the folder where the manga will be downloaded">info_outline</i></label>
+  <head>
+    <title> > Kerbero</title>
+    <meta name="charset" content="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/materialize.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+    <!--****************Tittle-bar buttons and app name + version***************************-->
+    <div id="title-bar">
+      <div id="title"><span id="application_name"></span> ver. <span id="application_version"></span></div>
+      <div id="title-bar-btns">
+        <button id="min-btn"><i class="material-icons">expand_more</i></button>
+        <button id="max-btn"><i class="material-icons">aspect_ratio</i></button>
+        <button id="close-btn"><i class="material-icons">settings_power</i></button>
       </div>
     </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <i class="material-icons prefix">label</i>
-        <input type="text" id="settings_download_threads"/>
-        <label for="settings_download_threads">Download threads <i class="material-icons valignicon tiny tooltipped" data-position="right" data-delay="50" data-tooltip="Number of parallels downloads, use a low number, 3 or 4">info_outline</i></label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-         <select id="settings_language">
-           <option value="English">English</option>
-           <option value="Spanish">Spanish</option>
-         </select>
-         <label for="settings_language">Language</label>
-       </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <i class="material-icons prefix">label</i>
-        <input type="text" id="settings_checkNewChapterFreq"/>
-        <label for="settings_checkNewChapterFreq">Chapter update interval <i class="material-icons valignicon tiny tooltipped" data-position="right" data-delay="50" data-tooltip="Number of hours to check for new chapters in favourites">info_outline</i></label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <i class="material-icons prefix">label</i>
-        <input type="text" id="settings_checkAppUpdateFreq"/>
-        <label for="settings_checkAppUpdateFreq">App update interval <i class="material-icons valignicon tiny tooltipped" data-position="right" data-delay="50" data-tooltip="Number of days to check for an APP update. Recommend: 1 > Every day.">info_outline</i></label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-         <select id="settings_downloadExt">
-           <option value="NONE">NONE</option>
-           <option value="ZIP">ZIP</option>
-           <option value="CBZ">CBZ</option>
-         </select>
-         <label for="settings_downloadExt">Download Extension</label>
-       </div>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="modal-close waves-effect waves-light btn" id="settings_btn_saveSettings"><i
-            class="material-icons right">save</i>Save</a>
-    <a href="#" class="waves-effect btn-flat" id="settings_btn_defaultSettings"><i
-            class="material-icons right">settings_backup_restore</i>Default Settings</a>
-    <a href="#" class="modal-close waves-effect btn-flat">Close</a>
-  </div>
-</div>
-
-
-<!--#############################################MODAL_ABOUT############################################-->
-<div id="modal_about" class="modal modal-fixed-footer">
-  <div class="modal-content">
-    <h4>More</h4>
-    <div class="row">
-      <ul class="collapsible" data-collapsible="accordion">
-        <li>
-          <div class="collapsible-header waves-effect"><i class="material-icons">info</i>About</div>
-          <div class="collapsible-body">
-            <p>
-              <b>Version:</b> ?<br/>
-              <b>Interface:</b> <a href="http://materializecss.com/">materializecss</a><br/>
-            </p>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="modal-close waves-effect btn-flat">Close</a>
-  </div>
-</div>
-<!--##########################################MODAL_MSG###########################################-->
-<div id="modal_msg" class="modal">
-  <div class="modal-content">
-    <div class="row">
-      <h4 class="col s12" id="modal_msg_title"></h4>
-    </div>
-    <div class="row">
-      <p class="col s12" id="modal_msg_message"></p>
-    </div>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="modal-close waves-effect waves-light btn">I got it!</a>
-  </div>
-</div>
-<!--********************************************MAIN-CONTENT********************************************-->
-<div id="application-container">
-  <header>
-    <div class="jumbotron">
-      <div class="container">
-        <div class="clear-nav">
-          <div class="logo"></a></div>
-          <div class="navigation">
-            <ul class="right">
-              <li>
-                <a href="#modal_settings" id="nav_btn_openSettingsModal" class="grey darken-2 waves-effect waves-light modal-trigger">
-                  <i class="material-icons left">settings</i>
-                  Settings
-                </a>
-              </li>
-              <li>
-                <a href="#modal_about" class="waves-effect waves-light grey darken-2 modal-trigger">
-                  <i class="material-icons left">more_horiz</i>
-                  <span class="badge new blue pulse" data-badge-caption="Updates">1</span>
-                  More
-                </a>
-              </li>
-            </ul>
+    <!--***********************************************MODALS***********************************************-->
+    <!--###########################################MODAL_SETTINGS###########################################-->
+    <div id="modal_settings" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <div class="row">
+          <h4 class="col s12">Settings</h4>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">folder</i>
+            <input type="text" id="settings_download_folder"/>
+            <label for="settings_download_folder">Folder to download <i class="material-icons valignicon tiny tooltipped" data-position="right" data-delay="50" data-tooltip="Select the folder where the manga will be downloaded">info_outline</i></label>
           </div>
         </div>
-        <div class="col s12 tab-wrapper">
-          <ul class="tabs tabs-fixed-width" style="overflow: hidden">
-            <li class="tab col s3"><a href="#tab_search">Search</a></li>
-            <li class="tab col s3"><a href="#tab_fav">Favorites</a></li>
-            <li class="tab col s3"><a href="#tab_d_url">Manga URL</a></li>
-            <li class="tab col s3"><a href="#tab_d_server">Manga servers</a></li>
-            <li class="tab col s3"><a href="#tab_downloads">Downloads</a></li>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">label</i>
+            <input type="text" id="settings_download_threads"/>
+            <label for="settings_download_threads">Download threads <i class="material-icons valignicon tiny tooltipped" data-position="right" data-delay="50" data-tooltip="Number of parallels downloads, use a low number, 3 or 4">info_outline</i></label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <select id="settings_language">
+              <option value="English">English</option>
+              <option value="Spanish">Spanish</option>
+            </select>
+            <label for="settings_language">Language</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">label</i>
+            <input type="text" id="settings_checkNewChapterFreq"/>
+            <label for="settings_checkNewChapterFreq">Chapter update interval <i class="material-icons valignicon tiny tooltipped" data-position="right" data-delay="50" data-tooltip="Number of hours to check for new chapters in favourites">info_outline</i></label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">label</i>
+            <input type="text" id="settings_checkAppUpdateFreq"/>
+            <label for="settings_checkAppUpdateFreq">App update interval <i class="material-icons valignicon tiny tooltipped" data-position="right" data-delay="50" data-tooltip="Number of days to check for an APP update. Recommend: 1 > Every day.">info_outline</i></label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <select id="settings_downloadExt">
+              <option value="NONE">NONE</option>
+              <option value="ZIP">ZIP</option>
+              <option value="CBZ">CBZ</option>
+            </select>
+            <label for="settings_downloadExt">Download Extension</label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="modal-close waves-effect waves-light btn" id="settings_btn_saveSettings"><i
+        class="material-icons right">save</i>Save</a>
+        <a href="#" class="waves-effect btn-flat" id="settings_btn_defaultSettings"><i
+        class="material-icons right">settings_backup_restore</i>Default Settings</a>
+        <a href="#" class="modal-close waves-effect btn-flat">Close</a>
+      </div>
+    </div>
+    <!--#############################################MODAL_ABOUT############################################-->
+    <div id="modal_about" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <h4>More</h4>
+        <div class="row">
+          <ul class="collapsible" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header waves-effect"><i class="material-icons">info</i>About</div>
+              <div class="collapsible-body">
+                <p>
+                  <b>Version:</b> ?<br/>
+                  <b>Interface:</b> <a href="http://materializecss.com/">materializecss</a><br/>
+                </p>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
+      <div class="modal-footer">
+        <a href="#" class="modal-close waves-effect btn-flat">Close</a>
+      </div>
     </div>
-  </header>
-  <main class="container">
-      <!-- lol what the hell, i'm going to fix this in the css soon -->
-      <br>
-
-      <div id="tab_search">
-        <form id="tab_search_form_search" class="row">
-          <div class="inline-input-group">
-            <input type="text" id="tab_search_form_search_input_searchString" class="input"
-                   placeholder="Start searching ...">
-            <button class="btn btn-large btn-flat indigo white-text">Search</button>
+    <!--##########################################MODAL_MSG###########################################-->
+    <div id="modal_msg" class="modal">
+      <div class="modal-content">
+        <div class="row">
+          <h4 class="col s12" id="modal_msg_title"></h4>
+        </div>
+        <div class="row">
+          <p class="col s12" id="modal_msg_message"></p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="modal-close waves-effect waves-light btn">I got it!</a>
+      </div>
+    </div>
+    <!--********************************************MAIN-CONTENT********************************************-->
+    <div id="application-container">
+      <header>
+        <div class="jumbotron">
+          <div class="container">
+            <div class="clear-nav">
+              <div class="logo"></a></div>
+              <div class="navigation">
+                <ul class="right">
+                  <li>
+                    <a href="#modal_settings" id="nav_btn_openSettingsModal" class="grey darken-2 waves-effect waves-light modal-trigger">
+                      <i class="material-icons left">settings</i>
+                      Settings
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#modal_about" class="waves-effect waves-light grey darken-2 modal-trigger">
+                      <i class="material-icons left">more_horiz</i>
+                      <span class="badge new blue pulse" data-badge-caption="Updates">1</span>
+                      More
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col s12 tab-wrapper">
+              <ul class="tabs tabs-fixed-width" style="overflow: hidden">
+                <li class="tab col s3"><a href="#tab_search">Search</a></li>
+                <li class="tab col s3"><a href="#tab_fav">Favorites</a></li>
+                <li class="tab col s3"><a href="#tab_d_url">Manga URL</a></li>
+                <li class="tab col s3"><a href="#tab_d_server">Manga servers</a></li>
+                <li class="tab col s3"><a href="#tab_downloads">Downloads</a></li>
+              </ul>
+            </div>
           </div>
+        </div>
+      </header>
+      <main class="container">
+        <!-- lol what the hell, i'm going to fix this in the css soon -->
+        <br>
+        <div id="tab_search">
+          <form id="tab_search_form_search" class="row">
+            <div class="inline-input-group">
+              <input type="text" id="tab_search_form_search_input_searchString" class="input"
+              placeholder="Start searching ...">
+              <button class="btn btn-large btn-flat indigo white-text">Search</button>
+            </div>
+            <div class="row">
+              <div class="col s3 center">
+                <input name="searchMode" type="radio" class="with-gap"
+                id="tab_search_manga_server" value="Manga Server" checked/>
+                <label for="tab_search_manga_server">Manga server</label>
+              </div>
+              <div class="col s3 center">
+                <input name="searchMode" type="radio" class="with-gap"
+                id="tab_search_manga_myal" value="MyAnimeList"/>
+                <label for="tab_search_manga_myal">MyAnimelist</label>
+              </div>
+              <div class="col s3 center">
+                <input name="searchMode" type="radio" class="with-gap"
+                id="tab_search_manga_baka" value="baka"/>
+                <label for="tab_search_manga_baka">Baka</label>
+              </div>
+              <div class="col s3 center">
+                <input name="searchMode" type="radio" class="with-gap"
+                id="tab_search_manga_google" value="google"/>
+                <label for="tab_search_manga_google">Google</label>
+              </div>
+            </div>
+          </form>
+          <div class="row" id="tab_search_results">
+            <div id="tab_search_results_searchProgressIndicator" class="row center hide">
+            </div>
+            <table id="tab_search_table_results" class="highlight col s12 responsive-table">
+              <thead>
+                <tr class="animated fadeInUp hide" id="tab_search_manga_server">
+                  <td><!--cover--></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><!--download_link--></td>
+                </tr>
+                <tr class="animated fadeInUp hide" id="tab_search_manga_myal">
+                  <td><!--cover--></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td><!--space--></td>
+                  <td><!--download_link--></td>
+                </tr>
+                <tr class="animated fadeInUp hide" id="tab_search_manga_baka">
+                  <td><!--cover--></td>
+                  <td></td>
+                  <td></td>
+                  <td><!--space--></td>
+                  <td><!--download_link--></td>
+                </tr>
+                <tr class="animated fadeInUp hide" id="tab_search_manga_google">
+                  <td><!--cover--></td>
+                  <td></td>
+                  <td></td>
+                  <td><!--download_link--></td>
+                </tr>
+              </thead>
+              <tbody id="tab_search_loading" class="hide">
+                <tr>
+                  <td class="center">
+                    <div class="preloader-wrapper big active">
+                      <div class="spinner-layer">
+                        <div class="circle-clipper left">
+                          <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                          <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                          <div class="circle"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody id="tab_search_table_results_tbody_results">
+              </tbody>
+              <tbody id="tab_search_table_results_tbody_noResults" class="animated fadeInUp hide">
+                <tr>
+                  <td class="center">Nothing found!</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- tab favourites!! -->
+        <div id="tab_fav">
           <div class="row">
-            <div class="col s3 center">
-              <input name="searchMode" type="radio" class="with-gap"
-                     id="tab_search_manga_server" value="Manga Server" checked/>
-              <label for="tab_search_manga_server">Manga server</label>
-            </div>
-            <div class="col s3 center">
-              <input name="searchMode" type="radio" class="with-gap"
-                     id="tab_search_manga_myal" value="MyAnimeList"/>
-              <label for="tab_search_manga_myal">MyAnimelist</label>
-            </div>
-            <div class="col s3 center">
-              <input name="searchMode" type="radio" class="with-gap"
-                     id="tab_search_manga_baka" value="baka"/>
-              <label for="tab_search_manga_baka">Baka</label>
-            </div>
-            <div class="col s3 center">
-              <input name="searchMode" type="radio" class="with-gap"
-                     id="tab_search_manga_google" value="google"/>
-              <label for="tab_search_manga_google">Google</label>
+            <div class="input-field col s12">
+              <label>Country</label>
             </div>
           </div>
-        </form>
-        <div class="row" id="tab_search_results">
-          <div id="tab_search_results_searchProgressIndicator" class="row center hide">
-
-          </div>
-          <table id="tab_search_table_results" class="highlight col s12 responsive-table">
+          <table id="tab_fav_table" class="highlight row responsive-table">
             <thead>
-            <tr class="animated fadeInUp hide" id="tab_search_manga_server">
-              <td><!--cover--></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><!--download_link--></td>
-            </tr>
-            <tr class="animated fadeInUp hide" id="tab_search_manga_myal">
-              <td><!--cover--></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><!--space--></td>
-              <td><!--download_link--></td>
-            </tr>
-            <tr class="animated fadeInUp hide" id="tab_search_manga_baka">
-              <td><!--cover--></td>
-              <td></td>
-              <td></td>
-              <td><!--space--></td>
-              <td><!--download_link--></td>
-            </tr>
-            <tr class="animated fadeInUp hide" id="tab_search_manga_google">
-              <td><!--cover--></td>
-              <td></td>
-              <td></td>
-              <td><!--download_link--></td>
-            </tr>
+              <tr>
+                <td>#</td>
+                <td><!--cover--></td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td><!--download_link--></td>
+              </tr>
             </thead>
-            <tbody id="tab_search_loading" class="hide">
-            <tr>
-              <td class="center">
-                <div class="preloader-wrapper big active">
-                  <div class="spinner-layer">
-                    <div class="circle-clipper left">
-                      <div class="circle"></div>
-                    </div>
-                    <div class="gap-patch">
-                      <div class="circle"></div>
-                    </div>
-                    <div class="circle-clipper right">
-                      <div class="circle"></div>
+            <tbody id="tab_fav_loadingIndicator">
+              <tr>
+                <td colspan="7" class="center">
+                  <div class="preloader-wrapper big active">
+                    <div class="spinner-layer">
+                      <div class="circle-clipper left">
+                        <div class="circle"></div>
+                      </div>
+                      <div class="gap-patch">
+                        <div class="circle"></div>
+                      </div>
+                      <div class="circle-clipper right">
+                        <div class="circle"></div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </td>
-            </tr>
+                </td>
+              </tr>
             </tbody>
-            <tbody id="tab_search_table_results_tbody_results">
-            </tbody>
-            <tbody id="tab_search_table_results_tbody_noResults" class="animated fadeInUp hide">
-            <tr>
-              <td class="center">Nothing found!</td>
-            </tr>
+            <tbody id="tab_charts_table_charts_tbody_charts">
             </tbody>
           </table>
         </div>
-      </div>
-      <!-- tab favourites!! -->
-      <div id="tab_fav">
-        <div class="row">
-          <div class="input-field col s12">
-            <label>Country</label>
-          </div>
-        </div>
-        <table id="tab_fav_table" class="highlight row responsive-table">
-          <thead>
-          <tr>
-            <td>#</td>
-            <td><!--cover--></td>
-            <td>#</td>
-            <td>#</td>
-            <td>#</td>
-            <td>#</td>
-            <td><!--download_link--></td>
-          </tr>
-          </thead>
-          <tbody id="tab_fav_loadingIndicator">
-          <tr>
-            <td colspan="7" class="center">
-              <div class="preloader-wrapper big active">
-                <div class="spinner-layer">
-                  <div class="circle-clipper left">
-                    <div class="circle"></div>
-                  </div>
-                  <div class="gap-patch">
-                    <div class="circle"></div>
-                  </div>
-                  <div class="circle-clipper right">
-                    <div class="circle"></div>
-                  </div>
+        <!-- tab download from url -->
+        <div id="tab_d_url">
+          <form id="tab_manga_form_url" class="row">
+            <div class="inline-input-group">
+              <input type="text" id="manga_url" class="input" placeholder="URL: https://bato.to/comic/_/comics/sheriff-evans-lies-r21685" value="http://mangapark.me/manga/hana-haru">
+              <button class="btn btn-large btn-flat indigo white-text">Go!</button>
+            </div>
+          </form>
+          <!-- loading -->
+          <div class="loading hide" id="loading">
+            <div class="preloader-wrapper big active">
+              <div class="spinner-layer">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                  <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                  <div class="circle"></div>
                 </div>
               </div>
-            </td>
-          </tr>
-          </tbody>
-          <tbody id="tab_charts_table_charts_tbody_charts">
-          </tbody>
-        </table>
-      </div>
-      <!-- tab download from url -->
-      <div id="tab_d_url">
-        <form id="tab_manga_form_url" class="row">
-          <div class="inline-input-group">
-            <input type="text" id="manga_url" class="input" placeholder="URL: https://bato.to/comic/_/comics/sheriff-evans-lies-r21685" value="http://mangapark.me/manga/hana-haru">
-            <button class="btn btn-large btn-flat indigo white-text">Go!</button>
-          </div>
-        </form>
-<!-- loading -->
-<div class="loading hide" id="loading">
-  <div class="preloader-wrapper big active">
-    <div class="spinner-layer">
-      <div class="circle-clipper left">
-        <div class="circle"></div>
-      </div>
-      <div class="gap-patch">
-        <div class="circle"></div>
-      </div>
-      <div class="circle-clipper right">
-        <div class="circle"></div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- loading -->
-<!-- manga info -->
-<div class="col s12 m7 info_manga hide">
-  <div class="card horizontal medium">
-      <div class="card-image waves-effect waves-block waves-light" id="manga_info_card_pic">
-        <img class="activator" src="">
-      </div>
-      <div class="card-content">
-        <div class="row" id="manga_title">
-        </div>
-        <div class="row" id="manga_about">
-        </div>
-      </div>
-      <div class="card-reveal" id="manga_sumary">
-      </div>
-        <div class="card-action">
-
-        <a class="hide btn-floating halfway-fab waves-effect waves-light red right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Remove from favs!" id="remove_from_fav" href="#!"><i class="material-icons">remove</i></a></span>
-        <a class="btn-floating halfway-fab waves-effect waves-light red right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add to favs!" id="add_to_fav" href="#!"><i class="material-icons">add</i></a></span>
-        <a class="scale-transition btn-floating halfway-fab waves-effect waves-light red right activator  tooltipped" data-position="bottom" data-delay="50" data-tooltip="Show sumary" href="#!"><i class="material-icons">info</i></a></span>
-        <a class="scale-transition btn-floating halfway-fab waves-effect waves-light blue right  tooltipped" data-position="bottom" data-delay="50" data-tooltip="MyAnimeList" href="#!">MyAL<i class="material-icons">add</i></a></span>
-      </div>
-    </div>
-</div>
- <!-- manga info -->
- <!-- download row -->
- <form class="row hide" id="download_ch">
-   <a class="waves-effect waves-light btn" id="select_all_ch"><i class="material-icons left">check_box</i>Check all</a>
-   <a class="waves-effect waves-light btn" id="uncheck_all_ch"><i class="material-icons left">check_box_outline_blank</i>Uncheck all</a>
-   <button class="btn waves-effect waves-light">Download selected<i class="material-icons right">cloud_download</i></button>
-  </form>
-  <!-- download row -->
- <!-- table manga chapters -->
- <div class="hide" id="chap_list_wrap">
-   <ul class="collection with-header" id="chap_list">
-   </ul>
- </div>
-<!-- table manga chapters -->
-      </div>
-      <div id="tab_d_server">
-        <form id="tab_url_form_server" class="row">
-          <div class="inline-input-group">
-            <input type="text" id="#" class="input" placeholder="Manga name">
-            <button class="btn btn-large btn-flat indigo white-text">Download</button>
-          </div>
-        </form>
-      </div>
-      <div id="tab_downloads">
-        <div class="row">
-          <div class="col s6">
-            <button id="openDownloadsFolder" style="width: 100%" class="btn btn-flat btn-large btn-block right indigo white-text">
-              Open Downloads Folder
-            </button>
-          </div>
-          <div class="col s6">
-            <button id="clearTracksTable" style="width: 100%" class="btn btn-flat btn-large btn-block right red white-text">Clear
-              List
-            </button>
-          </div>
-        </div>
-        <table id="tab_downloads_table_downloads" class="row responsive-table">
-          <thead>
-          <tr>
-            <td>Name</td>
-            <td>Size</td>
-            <td>Downloaded</td>
-            <td>Failed</td>
-            <td style="width: 25%;"><!--progress--></td>
-            <td><!--event buttons--></td>
-          </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-      </div>
-  </main>
-  <div class="fixed-action-btn" id="btn_scrollToTop" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red tooltipped" data-position="top" data-delay="50" data-tooltip="Scroll to top">
-      <i class="large material-icons">keyboard_arrow_up</i>
-    </a>
-  </div>
-  <footer>
-    <a class="waves-effect waves-light modal-trigger" href="#download-manager-bot"><div id="status">
-      <div class="progress"></div>
-      <div class="status-bar">
-        Downloading Now: [Isekai Shihai no Skill Taker Zero kara Hajimeru Dorei Harem] CH #[700] at [756kbps] | Queue: [12] mangas [36] ch | ETA [3] hours [25] mins
-      </div>
-    </div></a>
-  </footer>
-</div>
-<!-- modal footer -->
-<!-- Modal Structure -->
-<div id="download-manager-bot" class="modal bottom-sheet">
-  <div class="modal-content">
-              <h4>Download manager</h4>
-              <ul class="collection">
-                <li class="collection-item avatar">
-                  <div class="row">
-                    <div class="col s8">
-                      <img src="" alt="" class="circle">
-                      <span class="title">Naruto</span>
-                      <p>Downloading chapter: 66<br>
-                         30 in queue.
-                      </p>
-                    </div>
-                    <div class="col s4 download-controls">
-                      <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pause this download">pause_circle_filled</i></a>
-                      <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Manga info">book</i></a>
-                      <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cancel this download">cancel</i></a>
-                    </div>
-                  </div>
-                </li>
-                <li class="collection-item avatar">
-                  <div class="row">
-                    <div class="col s8">
-                      <img src="" alt="" class="circle">
-                      <span class="title">Overlord</span>
-                      <p>Downloading 66 chapters<br>
-                         Waiting~
-                      </p>
-                    </div>
-                    <div class="col s4 download-controls">
-                      <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pause this download">pause_circle_filled</i></a>
-                      <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Move UP!">publish</i></a>
-                      <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Manga info">book</i></a>
-                      <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cancel this download">cancel</i></a>
-                    </div>
-                  </div>
-                </li>
-                <li class="collection-item avatar">
-                  <div class="row">
-                    <div class="col s8">
-                      <img src="" alt="" class="circle">
-                      <span class="title">Bleach</span>
-                      <p>Downloading 10 chapters<br>
-                         Waiting~.
-                      </p>
-                    </div>
-                    <div class="col s4 download-controls">
-                      <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pause this download">pause_circle_filled</i></a>
-                      <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Move UP!">publish</i></a>
-                      <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Manga info">book</i></a>
-                      <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cancel this download">cancel</i></a>
-                    </div>
-                  </div>
-                </li>
-              </ul>
             </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-  </div>
-</div>
-<script>if (typeof module === 'object') {
-  window.module = module;
-  module = undefined;
-}</script>
-<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="js/materialize.min.js"></script>
-<!-- load app title-bar function -->
-<script src="js/appBase.js"></script>
-<!--
-* load the functions for modals
-* load the functions of the APIs router
- -->
-<script type="text/javascript" src="js/func.js"></script>
-<script>if (window.module) module = window.module;</script>
-</body>
+          </div>
+          <!-- loading -->
+          <!-- manga info -->
+          <div class="col s12 m7 info_manga hide">
+            <div class="card horizontal medium">
+              <div class="card-image waves-effect waves-block waves-light" id="manga_info_card_pic">
+                <img class="activator" src="">
+              </div>
+              <div class="card-content">
+                <div class="row" id="manga_title">
+                </div>
+                <div class="row" id="manga_about">
+                </div>
+              </div>
+              <div class="card-reveal" id="manga_sumary">
+              </div>
+              <div class="card-action">
+                <a class="hide btn-floating halfway-fab waves-effect waves-light red right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Remove from favs!" id="remove_from_fav" href="#!"><i class="material-icons">remove</i></a></span>
+                <a class="btn-floating halfway-fab waves-effect waves-light red right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add to favs!" id="add_to_fav" href="#!"><i class="material-icons">add</i></a></span>
+                <a class="scale-transition btn-floating halfway-fab waves-effect waves-light red right activator  tooltipped" data-position="bottom" data-delay="50" data-tooltip="Show sumary" href="#!"><i class="material-icons">info</i></a></span>
+                <a class="scale-transition btn-floating halfway-fab waves-effect waves-light blue right  tooltipped" data-position="bottom" data-delay="50" data-tooltip="MyAnimeList" href="#!">MyAL<i class="material-icons">add</i></a></span>
+              </div>
+            </div>
+          </div>
+          <!-- manga info -->
+          <!-- download row -->
+          <form class="row hide" id="download_ch">
+            <a class="waves-effect waves-light btn" id="select_all_ch"><i class="material-icons left">check_box</i>Check all</a>
+            <a class="waves-effect waves-light btn" id="uncheck_all_ch"><i class="material-icons left">check_box_outline_blank</i>Uncheck all</a>
+            <button class="btn waves-effect waves-light">Add to queue<i class="material-icons right">cloud_download</i></button>
+          </form>
+          <!-- download row -->
+          <!-- table manga chapters -->
+          <div class="hide" id="chap_list_wrap">
+            <ul class="collection with-header" id="chap_list">
+            </ul>
+          </div>
+          <!-- table manga chapters -->
+        </div>
+        <div id="tab_d_server">
+          <form id="tab_url_form_server" class="row">
+            <div class="inline-input-group">
+              <input type="text" id="#" class="input" placeholder="Manga name">
+              <button class="btn btn-large btn-flat indigo white-text">Download</button>
+            </div>
+          </form>
+        </div>
+        <!-- Tab downloads! -->
+        <div id="tab_downloads">
+          <div class="row">
+            <div class="col s6">
+              <button id="openDownloadsFolder" style="width: 100%" class="btn btn-flat btn-large btn-block right indigo white-text">
+              Open Downloads Folder
+              </button>
+            </div>
+            <div class="col s6">
+              <button id="clearTracksTable" style="width: 100%" class="btn btn-flat btn-large btn-block right red white-text">Clear
+              List
+              </button>
+            </div>
+          </div>
+          <table id="tab_downloads_table_downloads" class="row responsive-table">
+            <thead>
+              <tr>
+                <td>Name</td>
+                <td>Size</td>
+                <td>Downloaded</td>
+                <td>Failed</td>
+                <td style="width: 25%;"><!--progress--></td>
+                <td><!--event buttons--></td>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        <!-- Tab downloads! -->
+      </main>
+      <div class="fixed-action-btn" id="btn_scrollToTop" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large red tooltipped" data-position="top" data-delay="50" data-tooltip="Scroll to top">
+          <i class="large material-icons">keyboard_arrow_up</i>
+        </a>
+      </div>
+      <footer>
+        <a class="waves-effect waves-light modal-trigger" href="#download-manager-bot"><div id="status">
+          <div class="progress"></div>
+          <div class="status-bar">
+            Downloading Now: [Isekai Shihai no Skill Taker Zero kara Hajimeru Dorei Harem] CH #[700] at [756kbps] | Queue: [12] mangas [36] ch | ETA [3] hours [25] mins
+          </div>
+        </div></a>
+      </footer>
+    </div>
+    <!-- modal footer -->
+    <!-- Modal Structure -->
+    <div id="download-manager-bot" class="modal bottom-sheet">
+      <div class="modal-content">
+        <h4>Download manager</h4>
+        <ul class="collection">
+          <li class="collection-item avatar">
+            <div class="row">
+              <div class="col s8">
+                <img src="" alt="" class="circle">
+                <span class="title">Naruto</span>
+                <p>Downloading chapter: 66<br>
+                  30 in queue.
+                </p>
+              </div>
+              <div class="col s4 download-controls">
+                <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pause this download">pause_circle_filled</i></a>
+                <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Manga info">book</i></a>
+                <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cancel this download">cancel</i></a>
+              </div>
+            </div>
+          </li>
+          <li class="collection-item avatar">
+            <div class="row">
+              <div class="col s8">
+                <img src="" alt="" class="circle">
+                <span class="title">Overlord</span>
+                <p>Downloading 66 chapters<br>
+                  Waiting~
+                </p>
+              </div>
+              <div class="col s4 download-controls">
+                <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pause this download">pause_circle_filled</i></a>
+                <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Move UP!">publish</i></a>
+                <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Manga info">book</i></a>
+                <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cancel this download">cancel</i></a>
+              </div>
+            </div>
+          </li>
+          <li class="collection-item avatar">
+            <div class="row">
+              <div class="col s8">
+                <img src="" alt="" class="circle">
+                <span class="title">Bleach</span>
+                <p>Downloading 10 chapters<br>
+                  Waiting~.
+                </p>
+              </div>
+              <div class="col s4 download-controls">
+                <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Pause this download">pause_circle_filled</i></a>
+                <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Move UP!">publish</i></a>
+                <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Manga info">book</i></a>
+                <a href="#!" class="right"><i class="material-icons small tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cancel this download">cancel</i></a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+      </div>
+    </div>
+    <script>if (typeof module === 'object') {
+    window.module = module;
+    module = undefined;
+    }</script>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!-- load app title-bar function -->
+    <script src="js/appBase.js"></script>
+    <!--
+    * load the functions for modals
+    * load the functions of the APIs router
+    -->
+    <script type="text/javascript" src="js/func.js"></script>
+    <script>if (window.module) module = window.module;</script>
+  </body>
 </html>

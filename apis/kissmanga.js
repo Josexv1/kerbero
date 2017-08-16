@@ -1,9 +1,5 @@
 // load the JSON config
-var config = require('./kissmanga.json');
 const fse = require('fs-extra');
-console.log('Our JSON is: ',config);
-//load cloudflare challenge bypassvar cloudscraper = require('cloudscraper');
-// if the config say there is no need for cloudflare we will use normal request.
 const cloudscraper = require('cloudscraper');
 // we export the var URL from the func.js so we can work with it.
 module.exports = (url) => {
