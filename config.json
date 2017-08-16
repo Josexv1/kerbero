@@ -1,0 +1,23 @@
+{
+  "app": {
+    "option": "",
+    "showHelp": true
+  },
+  "userDefined": {
+    "downloadFolder": "C:\\Users\\Sexy\\Documents\\test",
+    "downloadThreads": "3",
+    "language": "English",
+    "checkNewChapterFreq": "1",
+    "checkAppUpdateFreq": "1",
+    "downloadExt": null,
+    "mangaFavs": {
+      "Hana Haru": "C:\\Users\\Sexy\\Documents\\test\\Hana Haru"
+    },
+    "myAnimeList": {
+      "updateMangaFreq": "1",
+      "api": "",
+      "data": "data",
+      "data2": "data"
+    }
+  }
+}
