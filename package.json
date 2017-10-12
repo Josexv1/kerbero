@@ -10,7 +10,7 @@
   "author": "Jose Suarez",
   "license": "MIT",
   "devDependencies": {
-    "electron": "1.7.6"
+    "electron": "1.7.9"
   },
   "dependencies": {
     "async": "^2.5.0",
